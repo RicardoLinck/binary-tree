@@ -88,5 +88,78 @@ namespace Tests
                 Assert.Greater(values[i],values[i-1]);
             }
         }
+
+        [Test]
+        public void ContainsNodeValueReturnTrue()
+        {
+            // Arrange
+            var sut = new Node<int>(5);
+            sut.Insert(6);
+            sut.Insert(7);
+            sut.Insert(4);
+            sut.Insert(3);
+
+            // Act
+            var contains = sut.Contains(5);
+
+            // Assert
+            Assert.IsTrue(contains);
+        }
+
+        [Test]
+        public void ContainsLesserValueNullLeftNodeReturnsFalse()
+        {
+            // Arrange
+            var sut = new Node<int>(5);
+            sut.Insert(6);
+
+            // Act
+            var contains = sut.Contains(4);
+
+            // Assert
+            Assert.IsFalse(contains);
+        }
+
+        [Test]
+        public void ContainsLesserValueLeftNodeReturnsTrue()
+        {
+            // Arrange
+            var sut = new Node<int>(5);
+            sut.Insert(4);
+
+            // Act
+            var contains = sut.Contains(4);
+
+            // Assert
+            Assert.IsTrue(contains);
+        }
+
+        [Test]
+        public void ContainsGreaterValueNullRightNodeReturnsFalse()
+        {
+            // Arrange
+            var sut = new Node<int>(5);
+            sut.Insert(4);
+
+            // Act
+            var contains = sut.Contains(6);
+
+            // Assert
+            Assert.IsFalse(contains);
+        }
+
+        [Test]
+        public void ContainsGreaterValuRightNodeReturnsTrue()
+        {
+            // Arrange
+            var sut = new Node<int>(5);
+            sut.Insert(6);
+
+            // Act
+            var contains = sut.Contains(6);
+
+            // Assert
+            Assert.IsTrue(contains);
+        }
     }
 }

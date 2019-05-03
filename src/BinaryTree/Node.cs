@@ -16,12 +16,12 @@ namespace BinaryTree
         public void Insert(T value)
         {
             var comparison = value.CompareTo(Value);
-            if( comparison == 0)
+            if (comparison == 0)
                 return;
-            
-            if(comparison < 0)
+
+            if (comparison < 0)
             {
-                if(Left != null)
+                if (Left != null)
                 {
                     Left.Insert(value);
                 }
@@ -32,14 +32,44 @@ namespace BinaryTree
             }
             else
             {
-               if(Right != null)
+                if (Right != null)
                 {
                     Right.Insert(value);
                 }
                 else
                 {
                     Right = new Node<T>(value);
-                } 
+                }
+            }
+        }
+
+        public bool Contains(T value)
+        {
+            var comparison = value.CompareTo(Value);
+            if (comparison == 0)
+                return true;
+
+            if (comparison < 0)
+            {
+                if (Left == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return Left.Contains(value);
+                }
+            }
+            else
+            {
+                if(Right == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return Right.Contains(value);
+                }
             }
         }
 
@@ -48,8 +78,8 @@ namespace BinaryTree
             var left = Left?.ToString();
             var right = Right?.ToString();
 
-            left += left !=null ? "," : "";
-            right = right !=null ? "," + right : "";
+            left += left != null ? "," : "";
+            right = right != null ? "," + right : "";
             return $"{left}{Value}{right}";
         }
     }
