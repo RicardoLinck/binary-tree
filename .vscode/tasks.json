@@ -27,8 +27,9 @@
             "type": "process",
             "args": [
                 "watch",
-                "run",
-                "${workspaceFolder}/tests/BinaryTreeTests/BinaryTreeTests.csproj"
+                "--project",
+                "${workspaceFolder}/tests/BinaryTreeTests/BinaryTreeTests.csproj",
+                "test"
             ],
             "problemMatcher": "$tsc"
         }
