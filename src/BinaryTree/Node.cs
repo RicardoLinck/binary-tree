@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace BinaryTree
 {
-    public class Node<T> where T : IComparable
+    public class Node<T> : IEnumerable<T>  where T : IComparable
     {
         public Node<T> Left { get; set; }
         public Node<T> Right { get; set; }
@@ -73,14 +75,36 @@ namespace BinaryTree
             }
         }
 
+        public IEnumerator<T> GetEnumerator()
+        {
+            if(Left != null)
+            {
+                foreach (var item in Left)
+                {
+                    yield return item;
+                }
+            }
+
+            yield return Value;
+
+            if(Right != null)
+            {
+                foreach (var item in Right)
+                {
+                    yield return item;
+                }
+            }
+
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable<T>)this).GetEnumerator();
+        }
+
         public override string ToString()
         {
-            var left = Left?.ToString();
-            var right = Right?.ToString();
-
-            left += left != null ? "," : "";
-            right = right != null ? "," + right : "";
-            return $"{left}{Value}{right}";
+            return string.Join(",",this);
         }
     }
 }

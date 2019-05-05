@@ -90,6 +90,25 @@ namespace Tests
         }
 
         [Test]
+        public void EnumerationReturnsItemsInOrder()
+        {
+            // Arrange
+            var sut = new Node<int>(5);
+            sut.Insert(6);
+            sut.Insert(7);
+            sut.Insert(4);
+            sut.Insert(3);
+
+            // Act
+            var lastValue = 3;
+            foreach (var value in sut)
+            {
+                Assert.GreaterOrEqual(value, lastValue);
+                lastValue = value;
+            }
+        }
+
+        [Test]
         public void ContainsNodeValueReturnTrue()
         {
             // Arrange
